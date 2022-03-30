@@ -1,0 +1,27 @@
+(sys:load "examples/sharedsystem/midisetup.xtm")
+
+(*metro* 'set-tempo 80)
+
+(define *mout* (pm_create_output_stream 0))
+
+;;----
+
+(set! *scale* (pc:scale 0 'phrygian))
+
+(:| got-1 2 0 (mplay *mout* (rel 60 @1) 80 dur 0) `(3 0 (3 0)))
+(:| got-2 4 0 (mplay *mout* (rel 48 @1 (pc:scale 0 'ionian)) 80 dur 0) `( 2 4 (2 0)))
+
+;; offset & rest
+(:| pat-1 2 0 (mplay *mout* @1 80 dur 0) (list 60 58 60 63 60 61))
+(:| pat-2 4 1 (mplay *mout* @1 80 dur 0) (list 67 67 67 '_ 36 65))
+
+;; using the quote operator
+(:| pat-3 4 0 (mplay *mout* @1 80 dur 0) '(67 67 67 _ 36 65))
+
+;; tie
+(:| pat-3 4 0 (mplay *mout* @1 80 dur 0) '(67 67 67 | | 65))
+
+;; sublists for sub-dividing the beats
+(:| pat-1 2 0 (mplay *mout* @1 80 dur 0) '(60 58 60 63 60 61))
+(:| pat-2 4 1 (mplay *mout* @1 80 dur 0) '(67 67 67 48 36 ( 61 65 )))
+(:| pat-3 8 0 (mplay *mout* @1 80 dur 1) '(48 (46 (49 46))))
