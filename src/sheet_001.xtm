@@ -19,9 +19,24 @@
 (:| pat-3 4 0 (mplay *mout* @1 80 dur 0) '(67 67 67 _ 36 65))
 
 ;; tie
-(:| pat-3 4 0 (mplay *mout* @1 80 dur 0) '(67 67 67 | | 65))
+(:| pat-4 4 0 (mplay *mout* @1 80 dur 0) '(67 67 67 | | 65))
 
 ;; sublists for sub-dividing the beats
 (:| pat-1 2 0 (mplay *mout* @1 80 dur 0) '(60 58 60 63 60 61))
 (:| pat-2 4 1 (mplay *mout* @1 80 dur 0) '(67 67 67 48 36 ( 61 65 )))
 (:| pat-3 8 0 (mplay *mout* @1 80 dur 1) '(48 (46 (49 46))))
+
+;; will sound identical
+(:| pat-5 4 0 (maplay *mout* @1 80 dur 0) '(60 | 48 61))
+(:| pat-6 4 0 (maplay *mout* @1 80 dur 0) '(60  (48 61)))
+
+;; playing multiple notes at once
+;; use vectors to specify events/values which are to be
+;; triggered simultaneously
+(:| chord-all 4 0 (mplay *mout* @1 80 dur 0) '(#(60 63 67)))
+
+;; classic vi-IV-I-V pop anthem
+(:| chord-prog 16 0 (mplay *mout* @1 80 dur 0)
+    '(#(60 63 67) #(60 63 68) #(58 63 67) (#(58 62 65) #(58 62 65))))
+
+;; multiple pattern lists
